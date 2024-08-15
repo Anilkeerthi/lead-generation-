@@ -1,0 +1,258 @@
+<mvc:View
+    controllerName="com.lead.leadgenerationm.controller.CreateLead"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:layout="sap.ui.layout"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns:u="sap.ui.unified"
+    xmlns="sap.m"
+>
+    <NavContainer id="wizardNavContainer">
+        <pages>
+            <Page
+                id="wizardContentPage"
+                showHeader="false"
+            >
+                <content>
+               
+                    <Wizard
+                        id="ShoppingCartWizard"
+                        complete="completedHandler"
+                        enableBranching="true"
+                        class="sapUiResponsivePadding--header sapUiResponsivePadding--content"
+                        
+                    >
+                 
+                        <WizardStep
+                            id="ContentsStep"
+                            nextStep="PaymentTypeStep"
+                            title="Create Lead"
+                        >
+                            <form:SimpleForm
+                                editable="true"
+                                layout="ResponsiveGridLayout"
+                            >
+                                <Label
+                                    text="Title"
+                                    required="true"
+                                />
+                                <Input
+                                    id="LeadName"
+                                    liveChange="additionalInfoValidation"
+                                    placeholder="Enter name of the Lead"
+                                    value="{/LeadName}"
+                                />
+                                <Label text="CustomerName" />
+                                <ComboBox
+                                    items="{
+ 
+                                           path: 'leadModel>/Customers',
+                                           sorter: { path: 'name' }
+                                           }"
+                                >
+                                    <core:Item
+                                        key="{leadModel>ID}"
+                                        text="{leadModel>name}"
+                                    />
+                                </ComboBox>
+
+                                <Label text="Description" />
+                                <TextArea
+                                    value="{/productDescription}"
+                                    rows="5"
+                                />
+                            </form:SimpleForm>
+                            <HBox
+                                justifyContent="Center"
+                                class="sapUiSmallMargin buttons"
+                            >
+                                <Button
+                                    width="100px"
+                                    text="Create"
+                                />
+                                <Button
+                                    width="100px"
+                                    text="Cancel"
+                                />
+                            </HBox>
+                        </WizardStep>
+
+                        <WizardStep
+                            id="PaymentTypeStep"
+                            title="Upload Document"
+                            optional="true"
+                        >
+                            <HBox
+                                alignItems="Center"
+                                justifyContent="Center"
+                            >
+                                <u:FileUploader
+                                    id="fileUploader"
+                                    name="myFileUpload"
+                                    uploadUrl="upload/"
+                                    tooltip="Upload your file to the local server"
+                                    uploadComplete="handleUploadComplete"
+                                    change="handleValueChange"
+                                    typeMissmatch="handleTypeMissmatch"
+                                    style="Emphasized"
+                                    fileType="txt,jpg"
+                                    placeholder="Choose a file for Upload..."
+                                >
+                                    <u:parameters>
+                                        <u:FileUploaderParameter
+                                            name="Accept-CH"
+                                            value="Viewport-Width"
+                                        />
+                                        <u:FileUploaderParameter
+                                            name="Accept-CH"
+                                            value="Width"
+                                        />
+                                        <u:FileUploaderParameter
+                                            name="Accept-CH-Lifetime"
+                                            value="86400"
+                                        />
+                                    </u:parameters>
+                                </u:FileUploader>
+                            </HBox>
+                            <HBox
+                                alignItems="Center"
+                                justifyContent="Center"
+                            >
+                                <Button
+                                    text="Upload File"
+                                    press="handleUploadPress"
+                                />
+                            </HBox>
+                        </WizardStep>
+                    </Wizard>
+                   
+                </content>
+            </Page>
+        </pages>
+    </NavContainer>
+
+    <!-- <Page
+        id="page"
+        title="{i18n>title}"
+    >
+        <content>
+            <ScrollContainer
+                vertical="true"
+                height=""
+            >
+                <tnt:ToolHeader
+                    id="shellLikeToolHeader"
+                    class="sapUiTinyMargin"
+                >
+                    <Button
+                        icon="sap-icon://menu2"
+                        type="Transparent"
+                        tooltip="Menu"
+                    >
+                        <layoutData>
+                            <OverflowToolbarLayoutData
+                                priority="NeverOverflow"
+                            />
+                        </layoutData>
+                    </Button>
+
+                    <Title
+                        text="LEAD GENERATION"
+                        wrapping="false"
+                        id="productName"
+                    >
+                        <layoutData>
+                            <OverflowToolbarLayoutData priority="Disappear" />
+                        </layoutData>
+                    </Title>
+                    <Avatar
+                        src="test-resources/sap/tnt/images/Woman_avatar_01.png"
+                        displaySize="XS"
+                        press=".onAvatarPressed"
+                        tooltip="Profile"
+                    >
+                        <layoutData>
+                            <OverflowToolbarLayoutData
+                                priority="NeverOverflow"
+                            />
+                        </layoutData>
+                    </Avatar>
+                </tnt:ToolHeader>
+            </ScrollContainer>
+        </content>
+        <Panel>
+            <f:SimpleForm
+                editable="true"
+                layout="ResponsiveGridLayout"
+                title="Create Lead"
+                labelSpanXL="3"
+                labelSpanL="3"
+                labelSpanM="3"
+                labelSpanS="12"
+                adjustLabelSpan="false"
+                emptySpanXL="4"
+                emptySpanL="4"
+                emptySpanM="4"
+                emptySpanS="0"
+                columnsXL="1"
+                columnsL="1"
+                columnsM="1"
+                singleContainerFullSize="false"
+            >
+                <f:content>
+                    <Label text="Title" />
+                    <Input
+                        value="{requirementModel>/title}"
+                        class="smallInput"
+                    />
+
+                    <Label text="Description" />
+                    <TextArea
+                        value="{requirementModel>/description}"
+                        class="smallInput"
+                    />
+
+                    <Label text="EmployeeID" />
+                    <Input
+                        value="{requirementModel>/employeeID}"
+                        class="smallInput"
+                    />
+                    <Label text="CustomerName" />
+                    <ComboBox
+                        width="350px"
+                        items="{
+ 
+                    path: 'leadModel>/Customers',
+                    sorter: { path: 'name' }
+                }"
+                    >
+                        <core:Item
+                            key="{leadModel>ID}"
+                            text="{leadModel>name}"
+                        />
+                    </ComboBox>
+                </f:content>
+            </f:SimpleForm>
+            <HBox
+                justifyContent="Center"
+                class="sapUiSmallMargin buttons"
+            >
+                <Button
+                    width="100px"
+                    text="Create"
+                />
+                <Button
+                    width="100px"
+                    text="Cancel"
+                />
+                
+            </HBox>
+        </Panel>
+         <Button
+                    width="100px"
+                    text="Back"
+                    press="backToDashboard"
+                />
+    </Page> -->
+</mvc:View>

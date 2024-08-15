@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Validation.V1.xml">
+        <edmx:Include Alias="Validation" Namespace="Org.OData.Validation.V1"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="MyService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <EntityContainer Name="EntityContainer">
+                <EntitySet Name="Customers" EntityType="MyService.Customers">
+                    <NavigationPropertyBinding Path="leads" Target="Leads"/>
+                </EntitySet>
+                <EntitySet Name="Leads" EntityType="MyService.Leads">
+                    <NavigationPropertyBinding Path="customer" Target="Customers"/>
+                    <NavigationPropertyBinding Path="documents" Target="Documents"/>
+                </EntitySet>
+                <EntitySet Name="Documents" EntityType="MyService.Documents">
+                    <NavigationPropertyBinding Path="lead" Target="Leads"/>
+                </EntitySet>
+                <ActionImport Name="CreateCustomer" Action="MyService.CreateCustomer"/>
+                <ActionImport Name="CreateLead" Action="MyService.CreateLead"/>
+            </EntityContainer>
+            <EntityType Name="Customers">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="name" Type="Edm.String" MaxLength="100"/>
+                <Property Name="email" Type="Edm.String" MaxLength="100"/>
+                <Property Name="phoneNumber" Type="Edm.String" MaxLength="20"/>
+                <Property Name="city" Type="Edm.String" MaxLength="50"/>
+                <NavigationProperty Name="leads" Type="Collection(MyService.Leads)" Partner="customer">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="Leads">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="title" Type="Edm.String" MaxLength="100"/>
+                <Property Name="description" Type="Edm.String" MaxLength="255"/>
+                <Property Name="status" Type="Edm.String" MaxLength="20" DefaultValue="New"/>
+                <NavigationProperty Name="customer" Type="MyService.Customers" Partner="leads">
+                    <ReferentialConstraint Property="customer_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="customer_ID" Type="Edm.Guid"/>
+                <NavigationProperty Name="documents" Type="Collection(MyService.Documents)" Partner="lead">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="Documents">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="name" Type="Edm.String" MaxLength="100"/>
+                <Property Name="url" Type="Edm.String" MaxLength="255"/>
+                <NavigationProperty Name="lead" Type="MyService.Leads" Partner="documents">
+                    <ReferentialConstraint Property="lead_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="lead_ID" Type="Edm.Guid"/>
+            </EntityType>
+            <ComplexType Name="CreateCustomerObj">
+                <Property Name="name" Type="Edm.String"/>
+                <Property Name="email" Type="Edm.String"/>
+                <Property Name="phoneNumber" Type="Edm.String"/>
+                <Property Name="city" Type="Edm.String"/>
+            </ComplexType>
+            <ComplexType Name="CreateLeadObj">
+                <Property Name="title" Type="Edm.String"/>
+                <Property Name="description" Type="Edm.String"/>
+                <Property Name="customerName" Type="Edm.String"/>
+            </ComplexType>
+            <Action Name="CreateCustomer" IsBound="false">
+                <Parameter Name="Input" Type="MyService.CreateCustomerObj"/>
+                <ReturnType Type="Edm.String"/>
+            </Action>
+            <Action Name="CreateLead" IsBound="false">
+                <Parameter Name="Input" Type="MyService.CreateLeadObj"/>
+                <ReturnType Type="Edm.String"/>
+            </Action>
+            <Annotations Target="MyService.Customers/ID">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="MyService.Leads/ID">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="MyService.Leads/status">
+                <Annotation Term="Validation.AllowedValues">
+                    <Collection>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="New"/>
+                            <PropertyValue Property="Value" String="New"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="InProgress"/>
+                            <PropertyValue Property="Value" String="InProgress"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="Implemented"/>
+                            <PropertyValue Property="Value" String="Implemented"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="MyService.Documents/ID">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

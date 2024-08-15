@@ -1,0 +1,118 @@
+<mvc:View
+    controllerName="com.lead.leadgenerationm.controller.Dashboard"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns:tnt="sap.tnt"
+    xmlns="sap.m"
+>
+    <Page
+        id="page"
+        title="{i18n>title}"
+    >
+        <content>
+            <ScrollContainer
+                vertical="true"
+                height=""
+            >
+                <tnt:ToolHeader
+                    id="shellLikeToolHeader"
+                    class="sapUiTinyMargin"
+                >
+                    <Button
+                        icon="sap-icon://menu2"
+                        type="Transparent"
+                        tooltip="Menu"
+                    >
+                        <layoutData>
+                            <OverflowToolbarLayoutData
+                                priority="NeverOverflow"
+                            />
+                        </layoutData>
+                    </Button>
+
+                    <Title
+                        text="LEAD GENERATION"
+                        wrapping="false"
+                        id="productName"
+                    >
+                        <layoutData>
+                            <OverflowToolbarLayoutData priority="Disappear" />
+                        </layoutData>
+                    </Title>
+
+                    <Avatar
+                        src="test-resources/sap/tnt/images/Woman_avatar_01.png"
+                        displaySize="XS"
+                        press=".onAvatarPressed"
+                        tooltip="Profile"
+                    >
+                        <layoutData>
+                            <OverflowToolbarLayoutData
+                                priority="NeverOverflow"
+                            />
+                        </layoutData>
+                    </Avatar>
+                </tnt:ToolHeader>
+            </ScrollContainer>
+            <GenericTile
+                class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout"
+                header="Existing Leads"
+                subheader=""
+                press="onPressExistingLead"
+                url="https://www.sap.com/"
+            >
+                <TileContent>
+                    <ImageContent
+                        src="test-resources/sap/m/demokit/sample/GenericTileAsLaunchTile/images/SAPLogoLargeTile_28px_height.png"
+                    />
+                </TileContent>
+            </GenericTile>
+
+            <GenericTile
+                class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout"
+                header="Create Lead"
+                subheader=""
+                press="onPressCreateLead"
+                url="https://www.sap.com/"
+            >
+                <TileContent>
+                    <ImageContent
+                        src="test-resources/sap/m/demokit/sample/GenericTileAsLaunchTile/images/SAPLogoLargeTile_28px_height.png"
+                    />
+                </TileContent>
+            </GenericTile>
+
+            <GenericTile
+                class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout"
+                header="Existing Customers"
+                subheader=""
+                press="onPressExistingCustomer"
+                url="https://www.sap.com/"
+            >
+                <TileContent>
+                    <ImageContent
+                        src="test-resources/sap/m/demokit/sample/GenericTileAsLaunchTile/images/SAPLogoLargeTile_28px_height.png"
+                    />
+                </TileContent>
+            </GenericTile>
+
+            <GenericTile
+                class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout"
+                header="On-board Customers"
+                subheader=""
+                press="onPressOnBoardCustomer"
+                url="https://www.sap.com/"
+            >
+                <TileContent>
+                    <ImageContent
+                        src="test-resources/sap/m/demokit/sample/GenericTileAsLaunchTile/images/SAPLogoLargeTile_28px_height.png"
+                    />
+                </TileContent>
+            </GenericTile>
+        </content>
+
+      
+            
+        
+    </Page>
+</mvc:View>

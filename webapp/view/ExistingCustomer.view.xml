@@ -1,0 +1,130 @@
+<mvc:View
+    controllerName="com.lead.leadgenerationm.controller.ExistingCustomer"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns:tnt="sap.tnt"
+    xmlns:f="sap.f"
+    xmlns="sap.m"
+>
+   <Page
+        id="page"
+        title="{i18n>title}"
+    >
+        <content>
+            <ScrollContainer
+                vertical="true"
+                height=""
+            >
+                <tnt:ToolHeader
+                    id="shellLikeToolHeader"
+                    class="sapUiTinyMargin"
+                >
+                     <Button
+                    icon="sap-icon://nav-back"
+                    type="Transparent"
+                    tooltip="Back"
+                    press="backToDashboard"
+                >
+                        <layoutData>
+                            <OverflowToolbarLayoutData
+                                priority="NeverOverflow"
+                            />
+                        </layoutData>
+                    </Button>
+
+                    <Title
+                        text="LEAD GENERATION"
+                        wrapping="false"
+                        id="productName"
+                    >
+                        <layoutData>
+                            <OverflowToolbarLayoutData priority="Disappear" />
+                        </layoutData>
+                    </Title>
+
+                    <Avatar
+                        src="test-resources/sap/tnt/images/Woman_avatar_01.png"
+                        displaySize="XS"
+                        press=".onAvatarPressed"
+                        tooltip="Profile"
+                    >
+                        <layoutData>
+                            <OverflowToolbarLayoutData
+                                priority="NeverOverflow"
+                            />
+                        </layoutData>
+                    </Avatar>
+                </tnt:ToolHeader>
+            </ScrollContainer>
+
+            
+                                            <OverflowToolbar>
+                                                <ToolbarSpacer />
+                                                <SearchField
+                                                id="searchCustomer"
+                                                    search="OnSearchCustomer"
+                                                    width="17.5rem"
+                                                    enableSuggestions="true"
+                                                />
+
+               
+
+
+                                            </OverflowToolbar>
+                                
+       
+
+        <Table
+            id="existingCustomerTable"
+            inset="false"
+            items="{
+			path: '/Customers'
+			
+		}"
+        >
+            <columns>
+                
+                <Column
+                    minScreenWidth="Tablet"
+                    demandPopin="true"
+                >
+                    <Text text="Name" />
+                </Column>
+                <Column
+                    minScreenWidth="Desktop"
+                    demandPopin="true"
+                    hAlign="Center"
+                >
+                    <Text text="E-mail" />
+                </Column>
+                <Column
+                    minScreenWidth="Desktop"
+                    demandPopin="true"
+                    hAlign="Center"
+                >
+                    <Text text="Mobile No" />
+                </Column>
+                <Column hAlign="Center">
+                    <Text text="City" />
+                </Column>
+            </columns>
+            <items>
+<ColumnListItem type="Navigation">
+                            <cells>
+                                
+                                <ObjectIdentifier text="{name}" />
+                                <ObjectIdentifier text="{email}" />
+                                <ObjectIdentifier text="{phoneNumber}" />
+                                <ObjectIdentifier text="{city}" />
+                                
+                                
+                            </cells>
+                        </ColumnListItem>
+                    
+
+            </items>
+        </Table>
+         </content>
+    </Page>
+</mvc:View>

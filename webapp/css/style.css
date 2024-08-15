@@ -1,0 +1,29 @@
+/* Enter your custom styles here */
+.sapUiTinyMargin{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+ .smallInput {
+    max-width: 350px; 
+}
+.smallInput {
+    max-width: 100%;
+}
+
+@media (min-width: 1200px) {
+    .smallInput {
+        max-width: 350px; 
+    }
+} 
+.buttons{
+gap: 10px;
+}
+
+
+
+
+
+
+
+

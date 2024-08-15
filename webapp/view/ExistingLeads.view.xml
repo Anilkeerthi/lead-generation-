@@ -1,0 +1,127 @@
+<mvc:View
+    controllerName="com.lead.leadgenerationm.controller.ExistingLeads"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns:tnt="sap.tnt"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.f"
+    xmlns="sap.m"
+>     <Page
+        id="page"
+        title="{i18n>title}"
+    >
+        <content>
+            <ScrollContainer
+                vertical="true"
+                height=""
+            >
+                <tnt:ToolHeader
+                    id="shellLikeToolHeader"
+                    class="sapUiTinyMargin"
+                >
+                        <Button
+                    icon="sap-icon://nav-back"
+                    type="Transparent"
+                    tooltip="Back"
+                    press="backToDashboard"
+                >
+                        <layoutData>
+                            <OverflowToolbarLayoutData
+                                priority="NeverOverflow"
+                            />
+                        </layoutData>
+                    </Button>
+
+                    <Title
+                        text="LEAD GENERATION"
+                        wrapping="false"
+                        id="productName"
+                    >
+                        <layoutData>
+                            <OverflowToolbarLayoutData priority="Disappear" />
+                        </layoutData>
+                    </Title>
+
+                    <Avatar
+                        src="test-resources/sap/tnt/images/Woman_avatar_01.png"
+                        displaySize="XS"
+                        press=".onAvatarPressed"
+                        tooltip="Profile"
+                    >
+                        <layoutData>
+                            <OverflowToolbarLayoutData
+                                priority="NeverOverflow"
+                            />
+                        </layoutData>
+                    </Avatar>
+                </tnt:ToolHeader>
+            </ScrollContainer>
+
+
+                                                        <OverflowToolbar>
+                                                <ToolbarSpacer />
+                                                <SearchField
+                                                       id="existingLeads"
+                                                     liveChange="OnSearchLeads"
+                                                    width="17.5rem"
+                                                    enableSuggestions="true"
+                                                />
+
+               
+
+
+                                            </OverflowToolbar>
+                                
+   
+
+        <Table
+            id="existingLeadsTable"
+            inset="false"
+            items="{
+			path: '/Leads'
+			
+		}"
+        >
+            <columns>
+                
+                <Column
+                    minScreenWidth="Tablet"
+                    demandPopin="true"
+                >
+                    <Text text="Title" />
+                </Column>
+                <Column
+                    minScreenWidth="Desktop"
+                    demandPopin="true"
+                    hAlign="Center"
+                >
+                    <Text text="Description" />
+                </Column>
+                <Column
+                    minScreenWidth="Desktop"
+                    demandPopin="true"
+                    hAlign="Center"
+                >
+                    <Text text="status" />
+                </Column>
+                <Column hAlign="Center">
+                    <Text text="Customer Name" />
+                </Column>
+            </columns>
+            <items>
+<ColumnListItem type="Navigation">
+                            <cells>
+                               
+                                <ObjectIdentifier text="{title}" />
+                                <ObjectIdentifier text="{description}" />
+                                <ObjectIdentifier text="{status}" />
+                                <ObjectIdentifier text="{customer_ID}" />
+                            </cells>
+                        </ColumnListItem>
+
+            </items>
+        </Table>
+             </content>
+    </Page>
+</mvc:View>
